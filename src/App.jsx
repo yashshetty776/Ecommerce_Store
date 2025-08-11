@@ -1,15 +1,18 @@
-import { useState } from 'react'
-import './App.css'
+// import './App.css'
+import { Routes, Route } from "react-router-dom";
+import { Navbar } from "./components";
+import { Home, Cart, Login } from "./pages";
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <div>
-      <div className="container mt-5">
-        <h1 className="text-primary">Hello, Bootstrap in Vite!</h1>
-        <button className="btn btn-success">Click Me</button>
-      </div>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
     </div>
   )
 }
