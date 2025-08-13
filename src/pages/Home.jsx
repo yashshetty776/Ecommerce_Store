@@ -1,8 +1,12 @@
 import React from 'react'
+import { Banner, ProductGrid } from '../components'
 
 function Home() {
   return (
-    <div>Home</div>
+    <div>
+      <Banner />
+      <ProductGrid />
+    </div>
   )
 }
 
