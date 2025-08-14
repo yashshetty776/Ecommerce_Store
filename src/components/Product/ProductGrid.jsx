@@ -1,24 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import ProductCard from "./ProductCard";
-import { getAllProducts } from "../../api/products";
+import { fetchProducts } from "../../redux/products/productActions";
 
 function ProductGrid() {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const dispatch = useDispatch();
+
+  const { products, loading, error } = useSelector((state) => state.products);
 
   useEffect(() => {
-    getAllProducts()
-      .then((data) => {
-        setProducts(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Error fetching products:", err);
-        setError("Failed to load products");
-        setLoading(false);
-      });
-  }, []);
+    dispatch(fetchProducts());
+  }, [dispatch]);
 
   if (loading) {
     return <h2 className="text-center my-5">Loading products...</h2>;

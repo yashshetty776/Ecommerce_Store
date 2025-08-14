@@ -1,27 +1,22 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getProductById } from "../../api/products";
-import { CartContext } from "../../context/CartContext";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProducts } from "../../redux/products/productActions";
+import { addToCart } from "../../redux/cart/cartActions";
 
 function ProductDetail() {
   const { id } = useParams();
-  const [product, setProduct] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const { addToCart } = useContext(CartContext);
+  const dispatch = useDispatch();
+
+  const { products, loading, error } = useSelector((state) => state.products);
 
   useEffect(() => {
-    getProductById(id)
-      .then((data) => {
-        setProduct(data || null);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Error fetching product details:", err);
-        setError("Failed to load product details");
-        setLoading(false);
-      });
-  }, [id]);
+    if (products.length === 0) {
+      dispatch(fetchProducts()); // Fetch all products only if not loaded
+    }
+  }, [dispatch, products.length]);
+
+  const product = products.find((p) => String(p.id) === String(id));
 
   if (loading) {
     return <h2 className="text-center mt-5">Loading...</h2>;
@@ -59,8 +54,10 @@ function ProductDetail() {
           <h4 className="text-danger mb-3">₹{product.price}</h4>
           <p>{product.description}</p>
           <div className="mt-4">
-            <button className="btn btn-primary btn-lg me-3" 
-            onClick={() => addToCart(product)}>
+            <button
+              className="btn btn-primary btn-lg me-3"
+              onClick={() => dispatch(addToCart(product))}
+            >
               Add to Cart
             </button>
             <button className="btn btn-warning btn-lg">Buy Now</button>

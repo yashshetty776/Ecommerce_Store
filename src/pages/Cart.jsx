@@ -1,14 +1,22 @@
-import { useContext } from "react";
-import { CartContext } from "../context/CartContext";
+import { useSelector, useDispatch } from "react-redux";
+import { removeFromCart, updateQuantity } from "../redux/cart/cartActions";
 
 const CartPage = () => {
-  const { cartItems, removeFromCart, updateQuantity } = useContext(CartContext);
+  const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.cart.cart); 
 
-  const totalAmount = cartItems.reduce((sum,item)=> sum + item.price * item.quantity, 0);
+  const totalAmount = cartItems.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
 
   return (
-    <div className="container-fluid my-4" style={{ backgroundColor: "#EAEDED", minHeight: "100vh" }}>
+    <div
+      className="container-fluid my-4"
+      style={{ backgroundColor: "#EAEDED", minHeight: "100vh" }}
+    >
       <div className="row">
+        {/* Cart Items Section */}
         <div className="col-lg-8 col-md-7 p-4">
           <h2 className="mb-4">Shopping Cart</h2>
           <hr />
@@ -17,7 +25,10 @@ const CartPage = () => {
           ) : (
             cartItems.map((item) => (
               <div key={item.id} className="card mb-3 shadow-sm border-0">
-                <div className="row g-0 p-3 rounded-5" style={{ backgroundColor: "white" }}>
+                <div
+                  className="row g-0 p-3 rounded-5"
+                  style={{ backgroundColor: "white" }}
+                >
                   <div className="col-md-3 d-flex align-items-center justify-content-center">
                     <img
                       src={item.image}
@@ -34,10 +45,11 @@ const CartPage = () => {
                         ₹{item.price}
                       </p>
 
+                      {/* Quantity Controls */}
                       <div className="d-flex align-items-center mb-2">
                         <button
                           className="btn btn-outline-secondary btn-sm"
-                          onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                          onClick={() => dispatch(updateQuantity(item.id, item.quantity - 1))}
                           disabled={item.quantity <= 1}
                         >
                           −
@@ -45,15 +57,16 @@ const CartPage = () => {
                         <span className="mx-2">{item.quantity}</span>
                         <button
                           className="btn btn-outline-secondary btn-sm"
-                          onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                          onClick={() => dispatch(updateQuantity(item.id, item.quantity + 1))}
                         >
                           +
                         </button>
                       </div>
 
+                      {/* Remove Item Button */}
                       <button
                         className="btn btn-danger mt-3 fw-bold"
-                        onClick={() => removeFromCart(item.id)}
+                        onClick={() => dispatch(removeFromCart(item.id))}
                         style={{ fontSize: "0.9rem" }}
                       >
                         Remove Item
@@ -66,11 +79,14 @@ const CartPage = () => {
           )}
         </div>
 
+        {/* Summary Section */}
         <div className="col-lg-4 col-md-5 p-4">
           <div className="card p-4 shadow-sm mt-5" style={{ top: "30px" }}>
             <h5>
               Subtotal ({cartItems.length} items):{" "}
-              <span className="text-danger fw-bold">₹{totalAmount.toFixed(2)}</span>
+              <span className="text-danger fw-bold">
+                ₹{totalAmount.toFixed(2)}
+              </span>
             </h5>
             <button className="btn btn-warning w-100 mt-3 fw-bold">
               Proceed to Buy
