@@ -1,4 +1,4 @@
-import { ADD_TO_CART, REMOVE_FROM_CART, UPDATE_QUANTITY } from "./cartActions";
+import { ADD_TO_CART, REMOVE_FROM_CART, UPDATE_QUANTITY, CLEAR_CART } from "./cartActions";
 
 const initialState = {
   cart: JSON.parse(localStorage.getItem("cart")) || []
@@ -46,6 +46,10 @@ const cartReducer = (state = initialState, action) => {
           ),
         };
       }
+    }
+
+    case CLEAR_CART: {
+      return { ...state, cart: [] };
     }
 
     default:

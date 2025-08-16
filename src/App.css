@@ -1,42 +1,89 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+.light-theme {
+  background-color: #ffffff;
+  color: #000;
+}
+.dark-theme {
+  background-color: #1b1a1a;
+  color: #fff;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* Cards and product grid */
+.dark-theme .card {
+  background-color: #23272b;
+  color: #f8f9fa !important;
+  border: 1px solid #333;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.dark-theme .card-body,
+.dark-theme .card-title,
+.dark-theme .card-text {
+  color: #f8f9fa !important;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* Links inside cards */
+.dark-theme .card a {
+  color: #f8f9fa !important;
+  text-decoration: none;
 }
 
-.card {
-  padding: 2em;
+.dark-theme .card a:hover {
+  color: #ffc107 !important;
+  text-decoration: underline; /* optional for hover effect */
 }
 
-.read-the-docs {
-  color: #888;
+/* Navbar colors */
+.dark-theme .navbar {
+  background-color: #23272b !important;
+  color: #f8f9fa !important;
 }
+
+/* Input and select fields */
+.dark-theme .form-control,
+.dark-theme .form-select {
+  background-color: #23272b;
+  color: #f8f9fa;
+  border: 1px solid #555;
+}
+
+/* Remove underlines from all links */
+.dark-theme a {
+  color: #81c3fa;
+  text-decoration: none;
+}
+
+.dark-theme a:hover {
+  color: #ffc107;
+  text-decoration: underline;
+}
+
+/* Cart badge */
+.dark-theme .badge {
+  background-color: #ff4500;
+  color: #fff;
+}
+
+/* Scrollbar for dark theme */
+.dark-theme ::-webkit-scrollbar {
+  width: 8px;
+}
+.dark-theme ::-webkit-scrollbar-track {
+  background: #1f1f1f;
+}
+.dark-theme ::-webkit-scrollbar-thumb {
+  background-color: #555;
+  border-radius: 10px;
+  border: 2px solid #1f1f1f;
+}
+
+/* Button hover */
+.btn:hover {
+  filter: brightness(85%);
+  transition: filter 0.2s ease;
+}
+
+/* Card hover */
+.card:hover {
+  box-shadow: 0 6px 20px rgba(255, 193, 7, 0.5);
+  transition: box-shadow 0.3s ease;
+}
+

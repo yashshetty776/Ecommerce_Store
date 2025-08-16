@@ -1,8 +1,12 @@
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { removeFromCart, updateQuantity } from "../redux/cart/cartActions";
+import { useEffect } from "react";
 
 const CartPage = () => {
+
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const cartItems = useSelector((state) => state.cart.cart); 
 
   const totalAmount = cartItems.reduce(
@@ -10,10 +14,14 @@ const CartPage = () => {
     0
   );
 
+  const goToCheckout = () => {
+    navigate("/checkout"); 
+  };
+
   return (
     <div
       className="container-fluid my-4"
-      style={{ backgroundColor: "#EAEDED", minHeight: "100vh" }}
+      style={{ minHeight: "100vh" }}
     >
       <div className="row">
         {/* Cart Items Section */}
@@ -27,7 +35,6 @@ const CartPage = () => {
               <div key={item.id} className="card mb-3 shadow-sm border-0">
                 <div
                   className="row g-0 p-3 rounded-5"
-                  style={{ backgroundColor: "white" }}
                 >
                   <div className="col-md-3 d-flex align-items-center justify-content-center">
                     <img
@@ -88,7 +95,7 @@ const CartPage = () => {
                 ₹{totalAmount.toFixed(2)}
               </span>
             </h5>
-            <button className="btn btn-warning w-100 mt-3 fw-bold">
+            <button className="btn btn-warning w-100 mt-3 fw-bold" onClick={goToCheckout}>
               Proceed to Buy
             </button>
           </div>

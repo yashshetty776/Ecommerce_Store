@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../redux/products/productActions";
 import { addToCart } from "../../redux/cart/cartActions";
@@ -7,16 +7,33 @@ import { addToCart } from "../../redux/cart/cartActions";
 function ProductDetail() {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { products, loading, error } = useSelector((state) => state.products);
 
   useEffect(() => {
     if (products.length === 0) {
-      dispatch(fetchProducts()); // Fetch all products only if not loaded
+      dispatch(fetchProducts()); 
     }
   }, [dispatch, products.length]);
 
   const product = products.find((p) => String(p.id) === String(id));
+
+  const requireLogin = (callback) => {
+  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+  if (!isLoggedIn) {
+    alert("Please login first!");
+    navigate("/login");
+    return;
+  }
+  callback();
+  };
+
+  const handleAddToCart = () => requireLogin(() => dispatch(addToCart(product)));
+  const handleBuy = () => requireLogin(() => {
+    dispatch(addToCart(product));
+    navigate("/checkout");
+  });
 
   if (loading) {
     return <h2 className="text-center mt-5">Loading...</h2>;
@@ -56,11 +73,11 @@ function ProductDetail() {
           <div className="mt-4">
             <button
               className="btn btn-primary btn-lg me-3"
-              onClick={() => dispatch(addToCart(product))}
+              onClick={handleAddToCart}
             >
               Add to Cart
             </button>
-            <button className="btn btn-warning btn-lg">Buy Now</button>
+            <button className="btn btn-warning btn-lg" onClick={handleBuy}>Buy Now</button>
           </div>
         </div>
       </div>
