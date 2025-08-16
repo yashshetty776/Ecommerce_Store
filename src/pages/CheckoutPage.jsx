@@ -26,7 +26,6 @@ const CheckoutPage = () => {
   return (
     <div className="container my-5">
       <Row>
-        {/* Form Section */}
         <Col lg={7}>
           <h3 className="mb-4 fst-italic text-decoration-underline text-center">Checkout</h3>
           <div className="p-4 border rounded shadow-sm">
@@ -78,6 +77,7 @@ const CheckoutPage = () => {
               <Form.Group as={Col} controlId="formCity">
                 <Form.Label>City</Form.Label>
                 <Form.Control
+                placeholder="Enter City"
                   {...register("city", { required: "City is required" })}
                   isInvalid={errors.city}
                 />
@@ -107,6 +107,7 @@ const CheckoutPage = () => {
               <Form.Group as={Col} controlId="formZip">
                 <Form.Label>Pin Code</Form.Label>
                 <Form.Control
+                placeholder="Enter Pin"
                   {...register("zip", { 
                     required: "Pin is required", 
                     pattern: { value: /^[0-9]{6}$/, message: "Enter a valid 6-digit zip" } 
@@ -126,7 +127,6 @@ const CheckoutPage = () => {
           </div>
         </Col>
 
-        {/* Summary Section */}
         <Col lg={5}>
           <Card className="p-3 shadow-sm mt-5 mt-lg-0">
             <h5>Order Summary</h5>
@@ -136,8 +136,8 @@ const CheckoutPage = () => {
               <ul className="list-unstyled">
                 {cartItems.map((item) => (
                   <li key={item.id} className="mb-2">
-                    {item.title} x {item.quantity} = ₹
-                    {Number(String(item.price).replace(/[^0-9.]/g, "")) * item.quantity}
+                    {item.title.split(" ").slice(0, 8).join(" ")} x {item.quantity} = ₹
+                    {item.price * item.quantity}
                   </li>
                 ))}
               </ul>

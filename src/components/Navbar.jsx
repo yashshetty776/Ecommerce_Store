@@ -64,7 +64,6 @@ function Navbar() {
         {suggestions.length > 0 && (
           <ul
             className="list-group position-absolute w-100 mt-5"
-            style={{ zIndex: 1000 }}
           >
             {suggestions.map((item) => (
               <li
@@ -80,7 +79,7 @@ function Navbar() {
         )}
       </form>
 
-      <div className="d-flex align-items-center ms-auto">
+      <div className="d-flex align-items-center ms-auto flex-nowrap">
         <Link to="/cart" className="btn btn-outline-light me-2 position-relative">
           <i className="bi bi-cart-fill"></i> Cart
           {cartCount > 0 && (

@@ -2,26 +2,28 @@ import './App.css'
 import { Routes, Route } from "react-router-dom";
 import { useContext } from "react";
 import { ThemeContext } from "./context/ThemeContext";
-import { Navbar,ProductDetails } from "./components";
+import { Navbar, ProductDetails, Footer } from "./components";
 import { Home, Cart, Login, CheckoutPage } from "./pages";
 
 function App() {
-
   const { theme } = useContext(ThemeContext);
 
   return (
-    <div className={theme === "light" ? "light-theme" : "dark-theme"}>
+    <div className={`${theme === "light" ? "light-theme" : "dark-theme"} d-flex flex-column min-vh-100`}>
       <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/product/:id" element={<ProductDetails />} />
-        <Route path="/cart" element={<Cart />} />
-         <Route path="/checkout" element={<CheckoutPage />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="*" element={<h2 className="text-center mt-5">Page Not Found</h2>} />
-      </Routes>
+      <div className="flex-grow-1">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/product/:id" element={<ProductDetails />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="*" element={<h2 className="text-center mt-5">Page Not Found</h2>} />
+        </Routes>
+      </div>
+      <Footer />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

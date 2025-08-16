@@ -7,7 +7,6 @@
   color: #fff;
 }
 
-/* Cards and product grid */
 .dark-theme .card {
   background-color: #23272b;
   color: #f8f9fa !important;
@@ -20,7 +19,6 @@
   color: #f8f9fa !important;
 }
 
-/* Links inside cards */
 .dark-theme .card a {
   color: #f8f9fa !important;
   text-decoration: none;
@@ -28,16 +26,13 @@
 
 .dark-theme .card a:hover {
   color: #ffc107 !important;
-  text-decoration: underline; /* optional for hover effect */
 }
 
-/* Navbar colors */
 .dark-theme .navbar {
   background-color: #23272b !important;
   color: #f8f9fa !important;
 }
 
-/* Input and select fields */
 .dark-theme .form-control,
 .dark-theme .form-select {
   background-color: #23272b;
@@ -45,7 +40,6 @@
   border: 1px solid #555;
 }
 
-/* Remove underlines from all links */
 .dark-theme a {
   color: #81c3fa;
   text-decoration: none;
@@ -53,16 +47,13 @@
 
 .dark-theme a:hover {
   color: #ffc107;
-  text-decoration: underline;
 }
 
-/* Cart badge */
 .dark-theme .badge {
   background-color: #ff4500;
   color: #fff;
 }
 
-/* Scrollbar for dark theme */
 .dark-theme ::-webkit-scrollbar {
   width: 8px;
 }
@@ -75,13 +66,11 @@
   border: 2px solid #1f1f1f;
 }
 
-/* Button hover */
 .btn:hover {
   filter: brightness(85%);
   transition: filter 0.2s ease;
 }
 
-/* Card hover */
 .card:hover {
   box-shadow: 0 6px 20px rgba(255, 193, 7, 0.5);
   transition: box-shadow 0.3s ease;

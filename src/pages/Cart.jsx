@@ -24,7 +24,7 @@ const CartPage = () => {
       style={{ minHeight: "100vh" }}
     >
       <div className="row">
-        {/* Cart Items Section */}
+
         <div className="col-lg-8 col-md-7 p-4">
           <h2 className="mb-4">Shopping Cart</h2>
           <hr />
@@ -52,7 +52,6 @@ const CartPage = () => {
                         ₹{item.price}
                       </p>
 
-                      {/* Quantity Controls */}
                       <div className="d-flex align-items-center mb-2">
                         <button
                           className="btn btn-outline-secondary btn-sm"
@@ -86,7 +85,6 @@ const CartPage = () => {
           )}
         </div>
 
-        {/* Summary Section */}
         <div className="col-lg-4 col-md-5 p-4">
           <div className="card p-4 shadow-sm mt-5" style={{ top: "30px" }}>
             <h5>

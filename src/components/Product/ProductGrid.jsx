@@ -2,7 +2,7 @@ import { useEffect, useState, } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import ProductCard from "./ProductCard";
 import { fetchProducts } from "../../redux/products/productActions";
-import Loader from "../Loader";
+import ProductSkeleton from "../Loading/ProductSkeleton";
 
 function ProductGrid() {
   const dispatch = useDispatch();
@@ -15,7 +15,19 @@ function ProductGrid() {
     dispatch(fetchProducts());
   }, [dispatch]);
 
-  if (loading) return <Loader />;
+  if (loading) {
+    return (
+      <div className="container my-4">
+        <div className="row">
+          {Array.from({ length: 8 }).map((_, idx) => (
+            <div className="col-md-3" key={idx}>
+              <ProductSkeleton />
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
   if (error) return <h2 className="text-center my-5 text-danger">{error}</h2>;
 
   const categories = ["All", ...new Set(products.map((p) => p.category))];

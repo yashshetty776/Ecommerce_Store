@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../redux/products/productActions";
 import { addToCart } from "../../redux/cart/cartActions";
+import Loader from "../Loading/Loader";
 
 function ProductDetail() {
   const { id } = useParams();
@@ -13,30 +14,38 @@ function ProductDetail() {
 
   useEffect(() => {
     if (products.length === 0) {
-      dispatch(fetchProducts()); 
+      dispatch(fetchProducts());
     }
   }, [dispatch, products.length]);
 
   const product = products.find((p) => String(p.id) === String(id));
 
   const requireLogin = (callback) => {
-  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-  if (!isLoggedIn) {
-    alert("Please login first!");
-    navigate("/login");
-    return;
-  }
-  callback();
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+    if (!isLoggedIn) {
+      alert("Please login first!");
+      navigate("/login");
+      return;
+    }
+    callback();
   };
 
   const handleAddToCart = () => requireLogin(() => dispatch(addToCart(product)));
-  const handleBuy = () => requireLogin(() => {
-    dispatch(addToCart(product));
-    navigate("/checkout");
-  });
+  const handleBuy = () =>
+    requireLogin(() => {
+      dispatch(addToCart(product));
+      navigate("/checkout");
+    });
+
+  const renderStars = (rating) => {
+    if (!rating) return "";
+    const numericRating = parseFloat(rating);
+    const stars = Math.round(numericRating);
+    return "⭐".repeat(stars) + "☆".repeat(5 - stars);
+  };
 
   if (loading) {
-    return <h2 className="text-center mt-5">Loading...</h2>;
+    return <Loader />;
   }
 
   if (error) {
@@ -70,6 +79,11 @@ function ProductDetail() {
           <p className="text-muted">{product.category}</p>
           <h4 className="text-danger mb-3">₹{product.price}</h4>
           <p>{product.description}</p>
+
+          <p className="mt-2">
+            {renderStars(product.rating)}({product.reviews} reviews)
+          </p>
+
           <div className="mt-4">
             <button
               className="btn btn-primary btn-lg me-3"
@@ -77,7 +91,9 @@ function ProductDetail() {
             >
               Add to Cart
             </button>
-            <button className="btn btn-warning btn-lg" onClick={handleBuy}>Buy Now</button>
+            <button className="btn btn-warning btn-lg" onClick={handleBuy}>
+              Buy Now
+            </button>
           </div>
         </div>
       </div>
