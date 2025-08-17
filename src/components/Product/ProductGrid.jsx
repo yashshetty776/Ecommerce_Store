@@ -20,7 +20,7 @@ function ProductGrid() {
   }
   if (error) return <h2 className="text-center my-5 text-danger">{error}</h2>;
 
-  const categories = ["All", "laptop", "headphones", "mobiles", "shoes", "bagpacks", "smartwatches"];
+  const categories = ["All", "laptop", "headphones", "mobile", "shoes", "backpack", "smartwatch"];
 
   return (
     <div className="container my-4">

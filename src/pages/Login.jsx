@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 const Login = () => {
 
+  const { setIsLoggedIn } = useContext(AuthContext);
   const navigate = useNavigate();
   
   const [isRegistered, setIsRegistered] = useState(
@@ -27,6 +29,7 @@ const Login = () => {
     }
     if (data.email === savedUser.email && data.password === savedUser.password) {
       localStorage.setItem("isLoggedIn", "true");
+      setIsLoggedIn(true);
       alert("Login successful!");
       navigate("/")
     } else {

@@ -15,7 +15,7 @@ const CheckoutPage = () => {
 
   const onSubmit = (data) => {
     console.log("Order Details:", data);
-    alert("Order placed successfully!");
+    alert(`Order placed successfully! ₹${totalAmount} to be paid at the time of delivery!!`);
     dispatch(clearCart());
     navigate("/"); 
   };

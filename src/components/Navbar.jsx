@@ -1,7 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useContext, useState, useMemo } from "react";
+import { useContext, useState } from "react";
 import { ThemeContext } from "../context/ThemeContext";
+import { AuthContext } from "../context/AuthContext";
 import Search from "./Search";
 
 function Navbar() {
@@ -9,6 +10,14 @@ function Navbar() {
   const cartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
   const { theme, toggleTheme } = useContext(ThemeContext);
+  const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    navigate("/login"); 
+  };
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-3 sticky-top">
@@ -28,9 +37,16 @@ function Navbar() {
           )}
         </Link>
 
-        <Link to="/login" className="btn btn-outline-light me-2">
-          Login
-        </Link>
+        {!isLoggedIn ? (
+          <Link to="/login" className="btn btn-outline-light me-2">
+            Login
+          </Link>
+        ) : (
+          <button onClick={handleLogout} className="btn btn-outline-danger me-2">
+            Logout
+          </button>
+        )}
+
 
         <button
           className="btn btn-outline-warning"
