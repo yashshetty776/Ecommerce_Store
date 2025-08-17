@@ -75,7 +75,7 @@ The product details displayed in this application are sourced by scraping data f
 
 - **Data Source:** Amazon product listings (scraped for demonstration)
 
-- **Hosting:** Static JSON hosted at: https://yashshetty776.github.io/sample_product_details/products/
+- **Hosting:** Static JSON hosted at github pages.
 
 - **Usage:** The frontend fetches product data from this URL at runtime to display product listings.
 
