@@ -52,7 +52,7 @@ function Search() {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
-      <button className="btn btn-warning" type="submit">
+      <button className="btn btn-warning d-none d-sm-inline-block" type="submit">
         Search
       </button>
 
