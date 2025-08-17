@@ -11,10 +11,7 @@ const CheckoutPage = () => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cart);
 
-  const totalAmount = cartItems.reduce(
-    (sum, item) => sum + item.price * item.quantity,
-    0
-  );
+  const totalAmount = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   const onSubmit = (data) => {
     console.log("Order Details:", data);

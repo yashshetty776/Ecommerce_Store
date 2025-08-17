@@ -1,10 +1,11 @@
 import axios from "axios";
 
+
 export const FETCH_PRODUCTS_REQUEST = "FETCH_PRODUCTS_REQUEST";
 export const FETCH_PRODUCTS_SUCCESS = "FETCH_PRODUCTS_SUCCESS";
 export const FETCH_PRODUCTS_FAILURE = "FETCH_PRODUCTS_FAILURE";
 
-const BASE_URL = "https://wuphf46.github.io/json-hosting/products";
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 export const fetchProducts = () => {
   return async (dispatch) => {

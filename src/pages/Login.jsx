@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
-const AuthForm = () => {
+const Login = () => {
 
   const navigate = useNavigate();
   
@@ -10,7 +10,7 @@ const AuthForm = () => {
     localStorage.getItem("user") ? true : false
   );
 
-  const { register, handleSubmit, watch, reset } = useForm();
+  const { register, handleSubmit, reset } = useForm();
 
   const onSubmitRegister = (data) => {
     localStorage.setItem("user", JSON.stringify(data)); 
@@ -36,10 +36,11 @@ const AuthForm = () => {
   };
 
   return (
-    <div className="container mt-5" style={{ maxWidth: "400px" }}>
+    <div className="container mt-5" style={{ maxWidth: "500px" }}>
       {isRegistered ? (
         <form onSubmit={handleSubmit(onSubmitLogin)}>
           <h3 className="mb-3">Login</h3>
+          
           <input
             className="form-control mb-2"
             placeholder="Email"
@@ -103,4 +104,4 @@ const AuthForm = () => {
   );
 };
 
-export default AuthForm;
+export default Login;

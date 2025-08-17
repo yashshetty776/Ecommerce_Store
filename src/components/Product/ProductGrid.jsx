@@ -2,7 +2,7 @@ import { useEffect, useState, } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import ProductCard from "./ProductCard";
 import { fetchProducts } from "../../redux/products/productActions";
-import ProductSkeleton from "../Loading/ProductSkeleton";
+import Loader from "../Loading/Loader";
 
 function ProductGrid() {
   const dispatch = useDispatch();
@@ -16,21 +16,11 @@ function ProductGrid() {
   }, [dispatch]);
 
   if (loading) {
-    return (
-      <div className="container my-4">
-        <div className="row">
-          {Array.from({ length: 8 }).map((_, idx) => (
-            <div className="col-md-3" key={idx}>
-              <ProductSkeleton />
-            </div>
-          ))}
-        </div>
-      </div>
-    );
+    return <Loader />
   }
   if (error) return <h2 className="text-center my-5 text-danger">{error}</h2>;
 
-  const categories = ["All", ...new Set(products.map((p) => p.category))];
+  const categories = ["All", "laptop", "headphones", "mobiles", "shoes", "bagpacks", "smartwatches"];
 
   return (
     <div className="container my-4">
@@ -65,7 +55,7 @@ function ProductGrid() {
       <div className="row">
         {products
           .filter((p) => (categoryFilter === "All" || p.category === categoryFilter) &&
-                         Number(String(p.price).replace(/[^0-9.]/g, "")) <= maxPrice)
+                         p.price <= maxPrice)
           .map((product) => (
             <div className="col-md-3 mb-4" key={product.id}>
               <ProductCard product={product} />

@@ -1,7 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { removeFromCart, updateQuantity } from "../redux/cart/cartActions";
-import { useEffect } from "react";
 
 const CartPage = () => {
 
@@ -69,11 +68,10 @@ const CartPage = () => {
                         </button>
                       </div>
 
-                      {/* Remove Item Button */}
                       <button
                         className="btn btn-danger mt-3 fw-bold"
                         onClick={() => dispatch(removeFromCart(item.id))}
-                        style={{ fontSize: "0.9rem" }}
+                        style={{ fontSize: "1rem" }}
                       >
                         Remove Item
                       </button>

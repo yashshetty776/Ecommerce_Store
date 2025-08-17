@@ -13,7 +13,7 @@ const ThemeProvider = ({ children }) => {
 
   useEffect(() => {
     localStorage.setItem("theme", theme);
-    document.documentElement.setAttribute("data-bs-theme", theme);
+    document.documentElement.setAttribute("data-bs-theme", theme);  
   }, [theme]);
 
   return (
