@@ -42,7 +42,7 @@ function Search() {
 
   return (
     <form
-      className="d-flex mx-auto w-50 position-relative"
+      className="d-flex mx-auto w-50 position-relative d-none d-sm-flex"
       onSubmit={handleSubmit}
     >
       <input

@@ -12,7 +12,7 @@ function Navbar() {
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-3 sticky-top">
-      <Link className="navbar-brand fw-bold text-warning d-none d-sm-inline-block" to="/">
+      <Link className="navbar-brand fw-bold text-warning" to="/">
         ECommerce
       </Link>
 
@@ -28,7 +28,7 @@ function Navbar() {
           )}
         </Link>
 
-        <Link to="/login" className="btn btn-outline-light me-2 d-none d-sm-inline-block">
+        <Link to="/login" className="btn btn-outline-light me-2">
           Login
         </Link>
 
